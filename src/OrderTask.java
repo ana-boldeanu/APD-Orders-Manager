@@ -3,10 +3,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OrderTask implements Runnable {
-    String folderPath, inOrdersPath, inProductsPath;
+    String folderPath, inProductsPath, inOrdersPath;
     ExecutorService ordersPool, productsPool;
     AtomicInteger ordersInQueue, productsInQueue;
     int orderIndex;
@@ -15,10 +16,13 @@ public class OrderTask implements Runnable {
     List<Integer> shippedList = Collections.synchronizedList(new ArrayList<>());
     BufferedReader reader;
     BufferedWriter ordersWriter, productsWriter;
+    Semaphore semaphore;
+    int nrThreads;
 
     public OrderTask(String folderPath, ExecutorService ordersPool, ExecutorService productsPool,
                      AtomicInteger ordersInQueue, AtomicInteger productsInQueue, int orderIndex,
-                     BufferedWriter ordersWriter, BufferedWriter productsWriter) throws IOException {
+                     BufferedWriter ordersWriter, BufferedWriter productsWriter,
+                     int nrThreads) throws IOException {
         this.folderPath = folderPath;
         this.ordersPool = ordersPool;
         this.productsPool = productsPool;
@@ -27,8 +31,9 @@ public class OrderTask implements Runnable {
         this.ordersWriter = ordersWriter;
         this.productsWriter = productsWriter;
         this.orderIndex = orderIndex;
-        this.inOrdersPath = folderPath + "/orders.txt";
         this.inProductsPath = folderPath + "/order_products.txt";
+        this.inOrdersPath = folderPath + "/orders.txt";
+        this.nrThreads = nrThreads;
     }
 
     @Override
@@ -47,28 +52,36 @@ public class OrderTask implements Runnable {
                     this.name = lineWords[0];
                     this.nrProducts = Integer.parseInt(lineWords[1]);
 
-                    // Start a product-delivery task
-                    productsInQueue.incrementAndGet();
-                    productsPool.submit(new ProductTask(inProductsPath, productsPool, productsInQueue,
-                            this, 0, productsWriter));
+                    if (nrProducts != 0) {
+                        // Set up the semaphore to wait for product tasks
+                        semaphore = new Semaphore(1 - nrProducts);
 
-                    // Submit next order
+                        // Add the product-delivery tasks to the pool
+                        for (int i = 0; i < nrProducts; i++) {
+                            productsInQueue.incrementAndGet();
+                            productsPool.submit(new ProductTask(inProductsPath, productsPool,
+                                    productsInQueue, this, i, productsWriter, semaphore));
+                        }
+
+                        // Wait for all products to be delivered
+                        semaphore.acquire();
+
+                        // Write the result to out file
+                        ordersWriter.write(line + ",shipped\n");
+                        ordersWriter.flush();
+                    }
+
+                    // Submit a new order task
                     ordersInQueue.incrementAndGet();
                     ordersPool.submit(new OrderTask(folderPath, ordersPool, productsPool,
-                            ordersInQueue, productsInQueue,  orderIndex + 1, ordersWriter,
-                            productsWriter));
+                            ordersInQueue, productsInQueue,  orderIndex + nrThreads,
+                            ordersWriter, productsWriter, nrThreads));
                     break;
 
                 } else {
                     currIndex++;
                 }
             }
-
-            // Wait for all products to be shipped
-            while (shippedList.size() != nrProducts) {
-                wait();
-            }
-
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

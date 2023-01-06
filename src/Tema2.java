@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,9 +23,12 @@ public class Tema2 {
         ExecutorService ordersPool = Executors.newFixedThreadPool(nrThreads);
         ExecutorService productsPool = Executors.newFixedThreadPool(nrThreads);
 
-        // Start the first order task
-        ordersInQueue.incrementAndGet();
-        ordersPool.submit(new OrderTask(folderPath, ordersPool, productsPool,
-                ordersInQueue, productsInQueue,  0, ordersWriter, productsWriter));
+        // Start the order tasks
+        for (int i = 0; i < nrThreads; i++) {
+            ordersInQueue.incrementAndGet();
+            ordersPool.submit(new OrderTask(folderPath, ordersPool, productsPool,
+                    ordersInQueue, productsInQueue,  i, ordersWriter, productsWriter,
+                    nrThreads));
+        }
     }
 }

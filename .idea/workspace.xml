@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf46d5b7-6cb1-4393-ba78-898bcad29cc2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checker/Tema2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OrderTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ProductTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tema2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checker/OrderTask.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checker/ProductTask.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checker/order_products_out.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checker/orders_out.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/order_products_out.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/orders_out.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/Tema2.class" beforeDir="false" afterPath="$PROJECT_DIR$/checker/Tema2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/APD-Tema-2/Tema2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/APD-Tema-2/Tema2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OrderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProductTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProductTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/README" beforeDir="false" afterPath="$PROJECT_DIR$/src/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tema2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tema2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +49,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Tema2">
     <configuration name="Tema2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Tema2" />
+      <module name="APD-Tema-2" />
+      <option name="PROGRAM_PARAMETERS" value="input/input_0 4" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
       <module name="APD-Tema-2" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -53,6 +68,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Tema2" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
