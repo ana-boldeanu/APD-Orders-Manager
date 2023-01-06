@@ -27,8 +27,8 @@ public class Tema2 {
         for (int i = 0; i < nrThreads; i++) {
             ordersInQueue.incrementAndGet();
             ordersPool.submit(new OrderTask(folderPath, ordersPool, productsPool,
-                    ordersInQueue, productsInQueue,  i, ordersWriter, productsWriter,
-                    nrThreads));
+                    ordersInQueue, productsInQueue, ordersWriter, productsWriter,
+                    nrThreads, i));
         }
     }
 }

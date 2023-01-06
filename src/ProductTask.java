@@ -9,7 +9,6 @@ public class ProductTask implements Runnable {
     AtomicInteger inQueue;
     OrderTask orderTask;
     int productIndex;
-    BufferedReader reader;
     BufferedWriter writer;
     Semaphore semaphore;
 
@@ -29,7 +28,7 @@ public class ProductTask implements Runnable {
     public void run() {
         try {
             File inputFile = new File(inputPath);
-            reader = new BufferedReader(new FileReader(inputFile));
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
             // Read file line by line, looking for the product with the given index
             String line;
@@ -37,12 +36,9 @@ public class ProductTask implements Runnable {
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith(orderTask.name)) {
                     if (foundProducts == productIndex) {
-                        // Deliver this product
+                        // Mark this product as shipped
                         writer.write(line + ",shipped\n");
                         writer.flush();
-
-                        // Mark product as shipped and notify the order manager
-                        orderTask.shippedList.add(productIndex);
                         break;
 
                     } else {

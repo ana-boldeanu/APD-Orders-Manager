@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf46d5b7-6cb1-4393-ba78-898bcad29cc2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/checker/OrderTask.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checker/ProductTask.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checker/order_products_out.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checker/orders_out.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/order_products_out.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/orders_out.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/OrderTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/checker/OrderTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checker/ProductTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/checker/ProductTask.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checker/Tema2.class" beforeDir="false" afterPath="$PROJECT_DIR$/checker/Tema2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/APD-Tema-2/Tema2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/APD-Tema-2/Tema2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OrderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OrderTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ProductTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProductTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/README" beforeDir="false" afterPath="$PROJECT_DIR$/src/README" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tema2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tema2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/checker.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/order_products_out.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/orders_out.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

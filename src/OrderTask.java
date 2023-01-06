@@ -10,37 +10,34 @@ public class OrderTask implements Runnable {
     String folderPath, inProductsPath, inOrdersPath;
     ExecutorService ordersPool, productsPool;
     AtomicInteger ordersInQueue, productsInQueue;
-    int orderIndex;
+    BufferedWriter ordersWriter, productsWriter;
+    int nrThreads, orderIndex;
+    Semaphore semaphore;
     String name;
     int nrProducts;
-    List<Integer> shippedList = Collections.synchronizedList(new ArrayList<>());
-    BufferedReader reader;
-    BufferedWriter ordersWriter, productsWriter;
-    Semaphore semaphore;
-    int nrThreads;
 
     public OrderTask(String folderPath, ExecutorService ordersPool, ExecutorService productsPool,
-                     AtomicInteger ordersInQueue, AtomicInteger productsInQueue, int orderIndex,
-                     BufferedWriter ordersWriter, BufferedWriter productsWriter,
-                     int nrThreads) throws IOException {
+                     AtomicInteger ordersInQueue, AtomicInteger productsInQueue,
+                     BufferedWriter ordersWriter, BufferedWriter productsWriter, int nrThreads,
+                     int orderIndex) {
         this.folderPath = folderPath;
+        this.inOrdersPath = folderPath + "/orders.txt";
+        this.inProductsPath = folderPath + "/order_products.txt";
         this.ordersPool = ordersPool;
         this.productsPool = productsPool;
         this.ordersInQueue = ordersInQueue;
         this.productsInQueue = productsInQueue;
         this.ordersWriter = ordersWriter;
         this.productsWriter = productsWriter;
-        this.orderIndex = orderIndex;
-        this.inProductsPath = folderPath + "/order_products.txt";
-        this.inOrdersPath = folderPath + "/orders.txt";
         this.nrThreads = nrThreads;
+        this.orderIndex = orderIndex;
     }
 
     @Override
     public void run() {
         try {
             File inputFile = new File(inOrdersPath);
-            reader = new BufferedReader(new FileReader(inputFile));
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
             // Read file line by line, until desired index is reached
             String line;
@@ -74,8 +71,8 @@ public class OrderTask implements Runnable {
                     // Submit a new order task
                     ordersInQueue.incrementAndGet();
                     ordersPool.submit(new OrderTask(folderPath, ordersPool, productsPool,
-                            ordersInQueue, productsInQueue,  orderIndex + nrThreads,
-                            ordersWriter, productsWriter, nrThreads));
+                            ordersInQueue, productsInQueue, ordersWriter, productsWriter,
+                            nrThreads, orderIndex + nrThreads));
                     break;
 
                 } else {
